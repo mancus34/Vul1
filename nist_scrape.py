@@ -4,14 +4,15 @@
 
 from urllib.request import urlopen as uReq
 from bs4 import BeautifulSoup as soup
-
+import re
 
 def set_data(cveID):
 	my_url = 'https://nvd.nist.gov/vuln/detail/' + cveID
-
 	# open a connection, grab the page
-	uClient = uReq(my_url)      # download the webpage
-	page_html = uClient.read()  # raw html
+	# download the webpage
+	uClient = uReq(my_url)
+	# raw html
+	page_html = uClient.read()
 	uClient.close()
 
 	# if page not found do something
@@ -26,18 +27,12 @@ def get_description():
 	return page_soup.find('p',{'data-testid':'vuln-description'}).text
 
 # Pre: set_data must be called
-# return cvss score
+# return cvss2 score screw the new scoring
 def get_cvss():
-	if page_soup.find('div',{'id':'vulnCvssPanel'})\
-		.find('div',{'id':'Vuln3CvssPanel'})\
-		.find('span',{'class':'severityDetail'}).a.text != 'N/A':
+	# grab cvss2 score
+	s = str(page_soup.find('div',{'id':'vulnCvssPanel'})\
+		.find('div',{'id':'Vuln2CvssPanel'})\
+		.find('span',{'class':'severityDetail'}).a.text)
+	return str(re.search(r'\d*', s))
 
-		# grab cvss3 score
-		return str(page_soup.find('div',{'id':'vulnCvssPanel'})\
-			.find('div',{'id':'Vuln3CvssPanel'})\
-			.find('span',{'class':'severityDetail'}).a.text)
-	else:
-		# grab cvss2 score
-		return str(page_soup.find('div',{'id':'vulnCvssPanel'})\
-			.find('div',{'id':'Vuln2CvssPanel'})\
-			.find('span',{'class':'severityDetail'}).a.text)
+#return how to fix vulnerability
