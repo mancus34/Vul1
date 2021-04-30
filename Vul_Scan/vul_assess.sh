@@ -1,12 +1,14 @@
 #!/bin/sh
 
+echo "Usage: scan a device for Common Vulnerabilities and Exposures (CVE)." 
 echo -n "Enter the IP address you would like to scan: "
 read address
 
 echo "Starting Vulnerability Scan..."
-nmap --script vulscan -sV ${address} > raw_results.txt
-echo "Reading results..."
-./modify_raw_results.py
-echo "Interpreting results..."
-./write_csv_file.py
-echo "Scan finished. You can view the results by openinWEBSITE"
+nmap --script vulscan -sV ${address} > vul_raw_results.txt
+echo "Filtering results..."
+./vul_modify_raw_results.py
+echo "Assessing results..."
+./vul_write_csv_file.py
+cp vul_results.csv vatGUI
+echo "Assessment Complete. You can view the results by opening the User Interface."
