@@ -1,0 +1,3 @@
+software needed
+	nmap vul scan script
+		nmap --script vulscan -sV IP_ADDRESS
