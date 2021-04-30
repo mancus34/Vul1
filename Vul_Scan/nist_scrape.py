@@ -3,21 +3,28 @@
 # nist_scrape: given a cveID scrape the description and vulnerability rating from nist.gov
 
 from urllib.request import urlopen as uReq
+from urllib.error import HTTPError
 from bs4 import BeautifulSoup as soup
 import re
 
 def set_data(cveID):
 	nist_url = 'https://nvd.nist.gov/vuln/detail/' + cveID
+	
+	try:
+		# open a connection, grab and download the web page
+		nist_client = uReq(nist_url)
+		nist_html = nist_client.read()	# raw HTML
+		nist_client.close()
 
-	# open a connection, grab and download the web page
-	nist_client = uReq(nist_url)
-	nist_html = nist_client.read()	# raw HTML
-	nist_client.close()
+		# parse html	soup(raw html, how you want to parse it)
+		global nist_soup
+		nist_soup = soup(nist_html, 'html.parser')
+		
+		return True
 
-	# parse html	soup(raw html, how you want to parse it)
-	global nist_soup
-	nist_soup = soup(nist_html, 'html.parser')
-
+	except HTTPError:
+		print('exception caught')
+		return False
 
 # Pre: set_data must be called
 # return description

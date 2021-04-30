@@ -11,8 +11,9 @@ results.write(headers)
 with open('vul_scan_results.csv') as file:
 	reader = csv.reader(file, delimiter='\t')
 	for row in reader:
-		 set_data(row[0])
-		 results.write(row[0] + '\t' + row[1] + '\t' +
+		if  set_data(row[0]):
+			print('inside')
+			results.write(row[0] + '\t' + row[1] + '\t' +
 		 	get_cvss() + '\t' + row[2] + '\t' + 
 		 	'https://nvd.nist.gov/vuln/detail/'+row[0] + '\n')
 results.close()
