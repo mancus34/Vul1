@@ -1,8 +1,8 @@
 All assessments are designed for Linux machines.
 
 To launch the Graphical User Interface (GUI) type the command
-"python3 PhilliesQOTesting.py"
-PhilliesQOTesting.py is in the folder vatGUI. You must be in the folder inorder to launch the GUI. 
+"python3 vatGUI.py"
+vatGUI.py is in the folder vatGUI. You must be in the folder inorder to launch the GUI. 
 
 IP assessment
 To obtain a list of IP connected Devices run the ip_assess.sh script.
@@ -22,6 +22,7 @@ Tkinter
 tkmagicgrid
 Beautiful Soup
 Re
+urllib
 
 Scanning software
 Nmap
