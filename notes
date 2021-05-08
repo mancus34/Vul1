@@ -1,4 +1,0 @@
-# grab cvss2 score
-        s = str(page_soup.find('div',{'id':'vulnCvssPanel'})                .find('div',{'id':'Vuln2CvssPanel'})                .find('span',{'class':'severityDetail'}).a.text)
-        return str(re.search(r'\d*\.\d', s).group(0))
-
