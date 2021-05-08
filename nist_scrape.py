@@ -3,54 +3,54 @@
 # nist_scrape: given a cveID scrape the description and vulnerability rating from nist.gov
 
 from urllib.request import urlopen as uReq
+from urllib.error import HTTPError
 from bs4 import BeautifulSoup as soup
 import re
-import selenium.webdriver as webdriver
 
 def set_data(cveID):
 	nist_url = 'https://nvd.nist.gov/vuln/detail/' + cveID
-	ibm_url = 'https://exchange.xforce.ibmcloud.com/vulnerabilities/' + cveID
 
-	# open a connection, grab and download the web page
-	nist_client = uReq(nist_url)
-	nist_html = nist_client.read()	# raw HTML
-	nist_client.close()
+	try:
+		# open a connection, grab and download the web page
+		nist_client = uReq(nist_url)
+		nist_html = nist_client.read()	# raw HTML
+		nist_client.close()
 
-	ibm_client = uReq(ibm_url)
-        ibm_html = ibm_client.read()  # raw HTML
-        ibm_client.close()
+		# parse html	soup(raw html, how you want to parse it)
+		global nist_soup
+		nist_soup = soup(nist_html, 'html.parser')
 
-	# if page not found do something
-	# parse html	soup(raw html, how you want to parse it)
-	global nist_soup
-	nist_soup = soup(nist_html, 'html.parser')
+		return True
 
-	global ibm_soup
-	ibm soup = soup(ibm_html, 'html.parser')
-
+	except HTTPError:
+		return False
 
 # Pre: set_data must be called
 # return description
 def get_description():
-	return nist_soup.find('p',{'data-testid':'vuln-description'}).text
+	try:
+		s = nist_soup.find('p',{'data-testid':'vuln-description'})
+
+		if s is None:
+			return 'description not found'
+
+		return str(s.text)
+	except NameError:
+		return 'invalid CVE'
 
 # Pre: set_data must be called
 # return cvss2 score screw the new scoring
 def get_cvss():
-	# grab cvss2 score
-	s = str(nist_soup.find('div',{'id':'vulnCvssPanel'})\
-		.find('div',{'id':'Vuln2CvssPanel'})\
-		.find('span',{'class':'severityDetail'}).a.text)
-	return str(re.search(r'\d*\.\d', s).group(0))
+	try:
+		# grab cvss2 score
+		s = nist_soup.find('div',{'id':'vulnCvssPanel'})
 
-# Pre: set_data must be called
-# return cost analysis
-def get_solution(search_term):
-	url = 'https://www.securityfocus.com/bid'
-	browser = webdriver.Firefox()
-	browser.get(url)
-	search_box = browser.find_element_by_xpath('//input[@type="text"]')
-	search_box.send_keys(search_term)
-	search_box.submit()
-	link = browser.find_element_by_xpath('//div//div//a
+		if s is None:
+			return 'cvss not found'
 
+		s = s.find('div',{'id':'Vuln2CvssPanel'})\
+		.find('span',{'class':'severityDetail'}).a.text
+		return str(re.search(r'\d*\.\d', s).group(0))
+
+	except NameError:
+		return 'invalid CVE'

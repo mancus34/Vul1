@@ -1,0 +1,384 @@
+Starting Nmap 7.80 ( https://nmap.org ) at 2021-05-07 23:52 EDT
+Nmap scan report for _gateway (10.0.0.1)
+Host is up (0.055s latency).
+Not shown: 993 closed ports
+PORT      STATE    SERVICE    VERSION
+22/tcp    filtered ssh
+23/tcp    filtered telnet
+53/tcp    open     domain     dnsmasq 2.78
+| vulscan: VulDB - https://vuldb.com:
+| [112337] Dnsmasq 2.78 DNSSEC Wildcard privilege escalation
+| [139275] Dnsmasq up to 2.75 DNS Server DNS Packet memory corruption
+| [107417] Dnsmasq up to 2.77 DNS Response Heap-based memory corruption
+| [107358] Dnsmasq up to 2.77 DNS Request add_pseudoheader denial of service
+| [107357] Dnsmasq up to 2.77 DNS Response Memory Leak denial of service
+| [107356] Dnsmasq up to 2.77 DHCPv6 Forwarded Request Memory information disclosure
+| [107355] Dnsmasq up to 2.77 DHCPv6 Request Stack-based memory corruption
+| [107354] Dnsmasq up to 2.77 IPv6 Router Advertisement Heap-based memory corruption
+| [107351] Dnsmasq up to 2.77 DNS Packet Size Negative Value Crash denial of service
+| [88494] Dnsmasq up to 2.75 Reply Crash denial of service
+| [75228] Dnsmasq up to 2.73rc3 tcp_request memory corruption
+| 
+| MITRE CVE - https://cve.mitre.org:
+| [CVE-2013-0198] Dnsmasq before 2.66test2, when used with certain libvirt configurations, replies to queries from prohibited interfaces, which allows remote attackers to cause a denial of service (traffic amplification) via spoofed TCP based DNS queries.  NOTE: this vulnerability exists because of an incomplete fix for CVE-2012-3411.
+| [CVE-2012-3411] Dnsmasq before 2.63test1, when used with certain libvirt configurations, replies to requests from prohibited interfaces, which allows remote attackers to cause a denial of service (traffic amplification) via a spoofed DNS query.
+| [CVE-2009-2958] The tftp_request function in tftp.c in dnsmasq before 2.50, when --enable-tftp is used, allows remote attackers to cause a denial of service (NULL pointer dereference and daemon crash) via a TFTP read (aka RRQ) request with a malformed blksize option.
+| [CVE-2009-2957] Heap-based buffer overflow in the tftp_request function in tftp.c in dnsmasq before 2.50, when --enable-tftp is used, might allow remote attackers to execute arbitrary code via a long filename in a TFTP packet, as demonstrated by a read (aka RRQ) request.
+| [CVE-2008-3350] dnsmasq 2.43 allows remote attackers to cause a denial of service (daemon crash) by (1) sending a DHCPINFORM while lacking a DHCP lease, or (2) attempting to renew a nonexistent DHCP lease for an invalid subnet as an "unknown client," a different vulnerability than CVE-2008-3214.
+| [CVE-2008-3214] dnsmasq 2.25 allows remote attackers to cause a denial of service (daemon crash) by (1) renewing a nonexistent lease or (2) sending a DHCPREQUEST for an IP address that is not in the same network, related to the DHCP NAK response from the daemon.
+| [CVE-2006-2017] Dnsmasq 2.29 allows remote attackers to cause a denial of service (application crash) via a DHCP client broadcast reply request.
+| [CVE-2005-0877] Dnsmasq before 2.21 allows remote attackers to poison the DNS cache via answers to queries that were not made by Dnsmasq.
+| [CVE-2005-0876] Off-by-one buffer overflow in Dnsmasq before 2.21 may allow attackers to execute arbitrary code via the DHCP lease file.
+| 
+| SecurityFocus - https://www.securityfocus.com/bid/:
+| [102812] Dnsmasq CVE-2017-15107 Security Bypass Vulnerability
+| [101085] Dnsmasq VU#973527 Multiple Security Vulnerabilities
+| [91031] Dnsmasq 'src/cache.c' Local Denial of Service Vulnerability
+| [84910] Dnsmasq CVE-2008-3214 Denial-Of-Service Vulnerability
+| [74452] Dnsmasq CVE-2015-3294 Remote Denial of Service Vulnerability
+| [74310] RETIRED: Dnsmasq CVE-2015-1859 Information Disclosure Vulnerability
+| [57458] Dnsmasq Multiple Remote Denial of Service Vulnerabilities
+| [54353] Dnsmasq Remote Denial of Service Vulnerability
+| [36121] Dnsmasq TFTP Service Remote Heap Buffer Overflow Vulnerability
+| [36120] Dnsmasq TFTP Service Remote NULL-Pointer Dereference Vulnerability
+| [31017] Dnsmasq DCHP Lease Multiple Remote Denial Of Service Vulnerabilities
+| [17662] DNSmasq Broadcast Reply Denial Of Service Vulnerability
+| [12897] Dnsmasq Multiple Remote Vulnerabilities
+| 
+| IBM X-Force - https://exchange.xforce.ibmcloud.com:
+| [81399] Dnsmasq DNS queries denial of service
+| [76833] Dnsmasq packets denial of service
+| [52974] Dnsmasq tftp_request() denial of service
+| [52973] Dnsmasq tftp_request() buffer overflow
+| [43960] Dnsmasq DHCPINFORM denial of service
+| [43957] Dnsmasq DHCP lease denial of service
+| [43929] Dnsmasq multiple denial of service
+| [26005] Dnsmasq DHCP denial of service
+| [19826] Dnsmasq DNS cache poisoning
+| [19825] Dnsmasq DHCP lease file off-by-one buffer overflow
+| 
+| Exploit-DB - https://www.exploit-db.com:
+| [9617] Dnsmasq < 2.50 Heap Overflow & Null pointer Dereference Vulns
+| 
+| OpenVAS (Nessus) - http://www.openvas.org:
+| [64925] Gentoo Security Advisory GLSA 200909-19 (dnsmasq)
+| [61597] Gentoo Security Advisory GLSA 200809-02 (dnsmasq)
+| [54905] Gentoo Security Advisory GLSA 200504-03 (Dnsmasq)
+| 
+| SecurityTracker - https://www.securitytracker.com:
+| [1022793] Dnsmasq TFTP Service Heap Overflow and Null Pointer Dereference Lets Remote Users Execute Arbitary Code
+| [1020651] Dnsmasq DNS Query Port Entropy Weakness Lets Remote Users Spoof the System
+| 
+| OSVDB - http://www.osvdb.org:
+| [89879] Dnsmasq w/ libvirtd TCP Network Packet Parsing Response DNS Amplification Remote DoS
+| [84652] Dnsmasq w/ libvirtd Network Packet Parsing Response DNS Amplification Remote DoS
+| [57593] Dnsmasq src/ftpd.c tftp_request() Function NULL Dereference Remote DoS
+| [57592] Dnsmasq src/tftp.c tftp_request() Function Remote Overflow
+| [49084] Dnsmasq Netlink Code Unspecified DoS
+| [49083] Dnsmasq Crafted DHCPINFORM Request Remote DoS
+| [47510] Dnsmasq DNS Query ID Field Prediction Cache Poisoning
+| [47509] Dnsmasq Nonexistent DHCP Lease Renewal Request Remote DoS
+| [24886] Dnsmasq with uclibc Unspecified Overflow
+| [24885] Dnsmasq Config File Name Format String
+| [24884] Dnsmasq DHCP Broadcast Reply Request DoS
+| [15020] Dnsmasq Malformed DHCP Host Name DoS
+| [15019] Dnsmasq DHCPDISCOVER Message Malformed ciaddr Issue
+| [15018] Dnsmasq DHCP Hostname Overflow DoS
+| [15001] Dnsmasq Lease File Reading Code Overflow
+| [15000] Dnsmasq Remote Cache Poisoning
+|_
+80/tcp    open     http       Xfinity Broadband Router Server
+| fingerprint-strings: 
+|   GetRequest, HTTPOptions: 
+|     HTTP/1.0 200 OK
+|     X-robots-tag: noindex,nofollow
+|     Content-type: text/html; charset=UTF-8
+|     X-Frame-Options: deny
+|     X-XSS-Protection: 1; mode=block
+|     X-Content-Type-Options: nosniff
+|     Content-Security-Policy: default-src 'self' 'unsafe-inline' 'unsafe-eval'; style-src 'self' 'unsafe-inline' 'unsafe-eval'; frame-src 'self' 'unsafe-inline' 'unsafe-eval'; font-src 'self' 'unsafe-inline' 'unsafe-eval'; form-action 'self' 'unsafe-inline' 'unsafe-eval'; script-src 'self' 'unsafe-inline' 'unsafe-eval'; img-src 'self'; connect-src 'self'; object-src 'none'; media-src 'none'; script-nonce 'none'; plugin-types 'none'; reflected-xss 'none'; report-uri 'none';
+|     Content-Length: 8617
+|     Connection: close
+|     Date: Sat, 08 May 2021 03:52:38 GMT
+|     Server: Xfinity Broadband Router Server
+|     <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+|_    <html xmlns="ht
+|_http-server-header: Xfinity Broadband Router Server
+111/tcp   filtered rpcbind
+443/tcp   open     ssl/https?
+49152/tcp open     upnp       Portable SDK for UPnP devices 1.6.22 (Linux 4.9.135-Prod_19.3; UPnP 1.0)
+| vulscan: VulDB - https://vuldb.com:
+| [63475] portable SDK for UPnP up to 1.6.8 unique_service_name memory corruption
+| [63474] portable SDK for UPnP up to 1.6.8 unique_service_name memory corruption
+| [63473] portable SDK for UPnP up to 1.6.8 unique_service_name memory corruption
+| [123909] OpenAFS up to 1.6.22/1.8.1 RPC Server Stack-based information disclosure
+| 
+| MITRE CVE - https://cve.mitre.org:
+| [CVE-2012-5960] Stack-based buffer overflow in the unique_service_name function in ssdp/ssdp_server.c in the SSDP parser in the portable SDK for UPnP Devices (aka libupnp, formerly the Intel SDK for UPnP devices) before 1.6.18 allows remote attackers to execute arbitrary code via a long UDN (aka upnp:rootdevice) field in a UDP packet.
+| [CVE-2012-5959] Stack-based buffer overflow in the unique_service_name function in ssdp/ssdp_server.c in the SSDP parser in the portable SDK for UPnP Devices (aka libupnp, formerly the Intel SDK for UPnP devices) before 1.6.18 allows remote attackers to execute arbitrary code via a long UDN (aka uuid) field within a string that contains a :: (colon colon) in a UDP packet.
+| [CVE-2012-5958] Stack-based buffer overflow in the unique_service_name function in ssdp/ssdp_server.c in the SSDP parser in the portable SDK for UPnP Devices (aka libupnp, formerly the Intel SDK for UPnP devices) before 1.6.18 allows remote attackers to execute arbitrary code via a UDP packet with a crafted string that is not properly handled after a certain pointer subtraction.
+| 
+| SecurityFocus - https://www.securityfocus.com/bid/:
+| [30706] Harmoni Versions Prior to 1.6.0 Cross-Site Request Forgery and Security Bypass Vulnerabilities
+| [4722] XMB Forum 1.6 Magic Lantern Log File Vulnerabilities
+| [4721] XMB Forum 1.6 Magic Lantern Cross Site Scripting Vulnerabilities
+| 
+| IBM X-Force - https://exchange.xforce.ibmcloud.com:
+| [85918] Image Manager plugin for TinyMCE 1.asp file upload
+| [84924] Brickcom 100Ap series IP Cameras users.cgi cross-site request forgery
+| [83857] Top 10 plugin for WordPress admin.inc.php cross-site scripting
+| [83856] Top 10 plugin for WordPress admin.inc.php cross-site request forgery
+| [82743] D-Link DAP 1150 index.cgi cross-site request forgery
+| [82722] podPress plugin for WordPress 1pixelout_player.swf cross-site scripting
+| [81336] IBM Netezza Performance Portal 1.0.2 multiple directory information disclosure
+| [74864] Seditio 170 admin.php cross-site request forgery
+| [72411] Beehive Forum 101 login.php and register.php cross-site scripting
+| [60545] PHP Chat module for 123 Flash Chat login_chat.php file include
+| [54460] This event reports a Proventia Server for Vmware 1.0 information message.
+| [50966] libpng 1-bit (2-color) interlaced image information disclosure
+| [49310] Plus 1 module for Drupal unspecified cross-site request forgery
+| [48545] Rockwell ControlLogix 1756-ENBT/A EtherNet/IP Bridge interface information disclosure
+| [23556] Cisco 11000 series Content Service Switches ArrowPoint information disclosure
+| [21549] 3Com OfficeConnect Wireless 11g Access Point information disclosure
+| [21345] Microsoft Windows 2000 Update Rollup 1 for Service Pack 4 has not been installed
+| [20735] SCADA Modbus function code 17 Report Slave ID request obtain information
+| [12667] SurfControl E-mail Filter for SMTP rules engine 16 or more .zip files filter bypass
+| [11612] 3Com SuperStack II Remote Access System 1500 GET request information disclosure
+| [10807] Fortres 101 could allow an attacker to bypass security restrictions
+| [10132] Microsoft Windows fails to properly check execute permissions for 16-bit executable files
+| [9277] Telindus 1100 series ADSL routers could leak sensitive information
+| [9266] Red-M 1050AP access point broadcasts device information
+| [9264] Red-M 1050AP access point TFTP brute force attack
+| [8436] ZyXEL ZyWALL 10 malformed ARP packet denial of service
+| [4165] NetSpy 1.2 backdoor for Windows
+| [3149] The Unexplained 1.0 backdoor for Windows 95/98 and Windows NT
+| [3147] Truva 1.2 backdoor for Windows 95/98
+| [295] WebSite 1.1 for Windows NT winsample buffer overflow
+| [85903] Multiple Western Digital My Net devices information disclosure
+| [85774] MiniUPnPd Minissdp.c information disclosure
+| [85296] Multiple Sprite Software products for LG Android devices privilege escalation
+| [82325] ownCloud Amazon SDK information disclosure
+| [81712] Broadcom UPnP stack SetConnectionType() format string
+| [80654] Portable phpMyAdmin plugin for WordPress security bypass
+| [79402] BTicino and Legrand Home Gateway devices information disclosure
+| [78564] Google Chrome for Android file:// URI handler information disclosure 1
+| [70270] Multiple HTC devices HtcLoggers.apk information disclosure
+| [69958] Google App Engine SDK for Python cross-site request forgery
+| [64479] SAP RFC SDK Library format string
+| [62516] Oracle Java SE and Java for Business Networking unspecified variant 1
+| [62515] Oracle Java SE and Java for Business Swing unspecified variant 1
+| [62513] Oracle Java SE and Java for Business CORBA unspecified variant 1
+| [62511] Oracle Java SE and Java for Business Java Web Start unspecified variant 1
+| [62508] Oracle Java SE and Java for Business Sound unspecified variant 1
+| [62504] Oracle Java SE and Java for Business Java Runtime Environment unspecified variant 1
+| [62496] Oracle Java SE and Java for Business 2D unspecified variant 1
+| [61120] Portable Document Format weak security
+| [57363] Oracle Java SE and Java for Business HotSpot Server unspecified variant 1
+| [57347] Oracle Java SE and Java for Business Java 2D unspecified variant 1
+| [57345] Oracle Java SE and Java for Business ImageIO unspecified variant 1
+| [52935] Cisco Aironet Lightweight Access Point (AP) devices LAN information disclosure
+| [52292] Webform module for Drupal unspecified cross-site scripting variant 1
+| [52077] IBM WebSphere Application Server Administrative Configservice API information disclosure variant 1
+| [50857] Multiple SonicWALL SSL-VPN devices VirtualOffice format string
+| [50690] This group of signatures uses multiple heuristic methods to detect malicious Portable Document Format (PDF) files.
+| [46845] Microsot Word malformed record code execution variant 1
+| [43231] XnView, NConvert, and GFL SDK format buffer overflow
+| [38645] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .123 file viewer buffer overflow
+| [38545] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK EML file viewer buffer overflow
+| [37377] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .exe file viewer buffer overflow
+| [37376] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .rtf file viewer buffer overflow
+| [37375] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .dll file viewer buffer overflow
+| [37374] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .ag file viewer buffer overflow
+| [37373] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .aw file viewer buffer overflow
+| [37360] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .doc file viewer buffer overflow
+| [37358] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .sam file viewer buffer overflow
+| [37357] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .wpd file viewer buffer overflow
+| [37356] Autonomy (formerly Verity) KeyView Viewer, Filter, and Export SDK .mif file viewer buffer overflow
+| [17702] Multiple vendor network devices Secure attribute transmit plaintext information
+| [12189] Sun Java Runtime Environment/SDK untrusted Applet could access information
+| [7858] Linux kernel allows an attacker to forge IP packets on tty devices
+| [7721] Microsoft Windows XP, Me, 98, and 98SE UPnP malformed NOTIFY directive buffer overflow
+| 
+| Exploit-DB - https://www.exploit-db.com:
+| [30218] BugHunter HTTP Server 1.6.2 Parse Error Information Disclosure Vulnerability
+| [7191] LoveCMS 1.6.2 Final (Simple Forum 3.1d) Change Admin Password Exploit
+| [30644] Dawn of Time 1.69 MUD Server Multiple Format String Vulnerabilities
+| [29387] Plogue Sforzando 1.665 - (SEH) Buffer Overflow PoC
+| [29117] Grandora Rialto 1.6 forminfo.asp refno Parameter XSS
+| [28382] WP-DB Backup For Wordpress 1.6/1.7 Edit.PHP Directory Traversal Vulnerability
+| [27479] Toast Forums 1.6 Toast.ASP Multiple Cross-Site Scripting Vulnerabilities
+| [26844] DCForum 1-6 DCBoard Script Page Parameter Cross-Site Scripting Vulnerability
+| [24606] Sudo 1.6.8 Information Disclosure Vulnerability
+| [22953] PHP-Gastebuch 1.60 Information Disclosure Vulnerabilities
+| [21448] XMB Forum 1.6 Magic Lantern Log File Vulnerabilities
+| [21447] XMB Forum 1.6 Magic Lantern Cross Site Scripting Vulnerabilities
+| [21300] XMB Forum 1.6 pre-beta Image Tag Script Injection Vulnerability
+| [21235] Citrix Nfuse 1.6 Published Applications Information Leak Vulnerability
+| [20405] DCForum 1-6 Arbitrary File Disclosure Vulnerability
+| [19906] Matt Wright FormMail 1.6/1.7/1.8 Environmental Variables Disclosure Vulnerability
+| [16235] Wordpress Plugin Forum Server 1.6.5 - SQL Injection Vulnerability
+| [13308] linux/x86 shellcode that forks a HTTP Server on port tcp/8800 166 bytes
+| [11651] Tod Miller Sudo 1.6.x before 1.6.9p21 and 1.7.x before 1.7.2p4
+| [8198] RoomPHPlanning <= 1.6 (userform.php) Create Admin User Exploit
+| [7606] FubarForum 1.6 Admin Bypass Change User Password Vulnerability
+| [7595] FubarForum 1.6 Arbitrary Admin Bypass Vulnerability
+| [5240] QuickTalk Forum <= 1.6 - Remote Blind SQL Injection Exploit
+| [4325] XAMPP for Windows 1.6.3a Local Privilege Escalation Exploit
+| [3738] XAMPP for Windows <= 1.6.0a mssql_connect() Remote BoF Exploit
+| [1956] Pearl For Mambo <= 1.6 - Multiple Remote File Include Vulnerabilities
+| 
+| OpenVAS (Nessus) - http://www.openvas.org:
+| [855582] Solaris Update for thread 126126-01
+| [855564] Solaris Update for /usr/sadm/lib/smc/lib/preload/jsdk21.jar 116808-02
+| [855512] Solaris Update for Sun LDAP C SDK 5.19 116837-04
+| [855503] Solaris Update for rpcsec_gss 126929-02
+| [855212] Solaris Update for /usr/sadm/lib/smc/lib/preload/jsdk21.jar 116807-02
+| [855158] Solaris Update for rpcsec_gss 126928-02
+| [855136] Solaris Update for thread 126125-01
+| [855865] Solaris Update for ping 116774-04
+| [855863] Solaris Update for ping 116775-04
+| [855833] Solaris Update for PostgreSQL 8.2 core 136998-08
+| [855822] Solaris Update for PostgreSQL 8.2 core 136999-08
+| [855820] Solaris Update for CDE 1.6 119280-22
+| [855818] Solaris Update for md 116669-37
+| [855799] Solaris Update for CDE Desktop changes - Solaris Trusted Extensions 126366-15
+| [855797] Solaris Update for sadmind 116453-03
+| [855769] Solaris Update for SunFreeware bzip2 126869-04
+| [855718] Solaris Update for CDE 1.6 139620-01
+| [855717] Solaris Update for SunFreeware bzip2 126868-03
+| [855712] Solaris Update for CDE Desktop changes - Solaris Trusted Extensions 126365-15
+| [855704] Solaris Update for sadmind 116454-03
+| [855679] Solaris Update for sadmind 116455-02
+| [855670] Solaris Update for PostgreSQL 8.2 core 136999-06
+| [855639] Solaris Update for PostgreSQL 8.2 core 136998-06
+| [855626] Solaris Update for sadmind 116442-02
+| [855614] Solaris Update for PostgreSQL 8.2 core 136999-05
+| [855605] Solaris Update for Federated Naming Service (FNS) X500 116997-01
+| [855603] Solaris Update for libkadm5 116046-09
+| [855601] Solaris Update for in.rwhod 116985-01
+| [855588] Solaris Update for /usr/bin/newgrp 116993-01
+| [855570] Solaris Update for /usr/sbin/ping 116986-02
+| [855566] Solaris Update for Apache 116973-07
+| [855565] Solaris Update for Obsoleted by 116455-01
+| [855559] Solaris Update for md 116669-36
+| [855555] Solaris Update for zebra ripd quagga 126206-04
+| [855550] Solaris Update for ImageMagick 136883-02
+| [855548] Solaris Update for powerd pmconfig 116559-01
+| [855531] Solaris Update for Apache 116974-07
+| [855508] Solaris Update for hsfs 116047-03
+| [855506] Solaris Update for sysid 106979-12
+| [855499] Solaris Update for pfexec 116237-01
+| [855479] Solaris Update for edit, ex, vedit, vi and view 116479-02
+| [855457] Solaris Update for rm 126441-01
+| [855450] Solaris Update for rm 126440-01
+| [855444] Solaris Update for crash 126131-01
+| [855425] Solaris Update for /usr/sbin/ping 116987-02
+| [855420] Solaris Update for crash 126132-01
+| [855415] Solaris Update for ip/arp/tcp/udp/tun 116966-33
+| [855409] Solaris Update for SunFreeware bzip2 126868-02
+| [855398] Solaris Update for audit_warn 116248-01
+| [855386] Solaris Update for in.rwhod 116984-01
+| [855383] Solaris Update for ImageMagick 136882-02
+| [855379] Solaris Update for pfexec 116238-01
+| [855377] Solaris Update for /usr/bin/newgrp 116994-01
+| [855373] Solaris Update for sysid 106978-12
+| [855367] Solaris Update for audit_warn 116247-01
+| [855343] Solaris Update for Federated Naming Service (FNS) X500 116998-01
+| [855305] Solaris Update for ping 116774-03
+| [855303] Solaris Update for gzip and Freeware info files 116341-07
+| [855298] Solaris Update for libDtHelp 116309-01
+| [855269] Solaris Update for gzip and Freeware info files 116340-07
+| [855236] Solaris Update for kadmind & kdb5_util 116044-04
+| [855233] Solaris Update for krb5 krb5kdc 116045-02
+| [855195] Solaris Update for ip/arp/tcp/udp/tun 116965-34
+| [855188] Solaris Update for autofs 116053-03
+| [855180] Solaris Update for ping 116775-03
+| [855145] Solaris Update for Obsoleted by 116453-02
+| [855127] Solaris Update for libkadm5 library 116175-05
+| [855124] Solaris Update for nfs and rpcmod 116960-21
+| [855123] Solaris Update for nfs and rpcmod 116959-21
+| [855121] Solaris Update for PostgreSQL 8.2 core 136998-05
+| [855091] Solaris Update for CDE 1.5 116308-01
+| [855078] Solaris Update for Obsoleted by 116454-02
+| [855065] Solaris Update for Obsoleted by 116442-01
+| [855064] Solaris Update for zebra ripd quagga 126207-04
+| [855038] Solaris Update for SunFreeware bzip2 126869-03
+| [855032] Solaris Update for ttymux 116489-01
+| [855015] Solaris Update for libdevice 116494-01
+| [66230] SLES11: Security update for IBM Java 1.6.0
+| [65682] SLES11: Security update for IBM Java 1.6.0
+| [65641] SLES11: Security update for IBM Java 1.6.0
+| [58590] Debian Security Advisory DSA 1369-1 (gforge)
+| 
+| SecurityTracker - https://www.securitytracker.com:
+| [1028418] Cisco IOS XE for 1000 Series Aggregation Services Routers Lets Remote Users Deny Service
+| [1024289] HP ProCurve 1800 Switch Discloses Potentially Sensitive Information to Remote Users via SNMP
+| [1019054] Autonomy KeyView SDK Buffer Overflow in Processing Lotus 1-2-3 Files Lets Remote Users Execute Arbitrary Code
+| [1015081] Cisco 11500 Content Services Switch Lets Remote Users Deny Service With Malformed SSL Client Certificates
+| [1014578] Office Connect Wireless 11g Access Point Discloses System Information to Remote Users
+| [1010566] IEEE 1394 for Linux Has Integer Overflows That Let Local Users Crash the System
+| [1006370] 3Com SuperStack Remote Access System 1500 Discloses Configuration Information to and Can Be Crashed By Remote Users
+| [1005766] Fortres 101 Disk Security Software Bug Lets Local Users Gain Unrestriced Disk Access
+| [1004466] Red-M 1050 Access Point Wireless Bluetooth Gateway Lets Remote Users Deny Service, Conduct Brute Force Password Guessing Attacks, and Possibly Hijack Administrative Sessions
+| [1004100] Buffer Overflow in Solaris Event Detector Daemon (edd) for Enterprise 10000 SSP Server May Let Remote Users Gain Root Access to the System
+| [1002755] Cisco 12000 Series Internet Routers May Fail to Enforce Access Control Lists, Allowing Remote Users to Bypass the Packet Filtering Security Rules
+| [1001330] Microsoft ActiveSync Software for Portable Computing Devices Allows Portable Devices to Access Files on a Locked Server
+| [1001084] Sun Solaris SNMP Network Management Daemon for Enterprise 10,000 May Give Root Access To Local Users
+| [1025935] Sybase Unwired Platform Device Database May Not Be Properly Encrypted on BlackBerry Devices
+| [1023388] APC Network Management Card Devices Input Validation Flaws Permit Cross-Site Scripting and Cross-Site Request Forgery Attacks
+| [1022985] IBM Informix Client SDK Integer Overflow in Processing '.nfx' Files Lets Remote Users Execute Arbitrary Code
+| [1016134] Linksys WRT54GS UPnP Bug Lets Remote Internal Users Cause Packets to Be Forwarded to External Systems
+| [1014456] MIMEsweeper for Web May Let Remote Code Bypass the Portable Code Manager
+| [1014148] Apple's Managed Client for OS X (MCX) Discloses Portable Home Directory Credentials to Local Users
+| [1007370] Cisco LEAP Authentication Protocol for Wireless Devices Is Vulnerable to Dictionary Attacks
+| [1006935] Sun Java (JRE/SDK) Access Control Flaw Lets Untrusted Applets Access Information From Other Applets
+| [1005339] Microsoft Services for Unix Interix SDK Bugs May Allow Denial of Service Conditions or May Execute Arbitrary Code
+| [1003677] Cisco IOS-based Devices That Use Cisco Express Forwarding (CEF) May Leak Data from One Packet into Another Packet in Certain Situations
+| [1003321] Cyberstop Web Server Can Be Crashed By Remote Users Sending URL Requests for MS-DOS Devices
+| [1003152] BEA WebLogic Server Can Be Crashed By Remote Users Sending Multiple Requests for DOS Devices.
+| 
+| OSVDB - http://www.osvdb.org:
+| [90578] Portable SDK for UPnP Devices libupnp unique_service_name() Function SSDP Request Handling Multiple Remote Overflows
+| [89992] Portable SDK for UPnP Devices libupnp Malformed XML Parsing Remote DoS
+| [89611] Portable SDK for UPnP Devices libupnp unique_service_name() Function SSDP Request Handling Three Remote Overflows
+| [76998] NeoRecruit (com_neorecruit) Component 1.6.4 for Joomla! index.php Itemid Parameter SQL Injection
+|_
+1 service unrecognized despite returning data. If you know the service/version, please submit the following fingerprint at https://nmap.org/cgi-bin/submit.cgi?new-service :
+SF-Port80-TCP:V=7.80%I=7%D=5/7%Time=60960B06%P=x86_64-pc-linux-gnu%r(GetRe
+SF:quest,24AE,"HTTP/1\.0\x20200\x20OK\r\nX-robots-tag:\x20noindex,nofollow
+SF:\r\nContent-type:\x20text/html;\x20charset=UTF-8\r\nX-Frame-Options:\x2
+SF:0deny\r\nX-XSS-Protection:\x201;\x20mode=block\r\nX-Content-Type-Option
+SF:s:\x20nosniff\r\nContent-Security-Policy:\x20default-src\x20'self'\x20'
+SF:unsafe-inline'\x20'unsafe-eval';\x20style-src\x20'self'\x20'unsafe-inli
+SF:ne'\x20'unsafe-eval';\x20frame-src\x20'self'\x20'unsafe-inline'\x20'uns
+SF:afe-eval';\x20font-src\x20'self'\x20'unsafe-inline'\x20'unsafe-eval';\x
+SF:20form-action\x20'self'\x20'unsafe-inline'\x20'unsafe-eval';\x20script-
+SF:src\x20'self'\x20'unsafe-inline'\x20'unsafe-eval';\x20img-src\x20'self'
+SF:;\x20connect-src\x20'self';\x20object-src\x20'none';\x20media-src\x20'n
+SF:one';\x20script-nonce\x20'none';\x20plugin-types\x20'none';\x20reflecte
+SF:d-xss\x20'none';\x20report-uri\x20'none';\r\nContent-Length:\x208617\r\
+SF:nConnection:\x20close\r\nDate:\x20Sat,\x2008\x20May\x202021\x2003:52:38
+SF:\x20GMT\r\nServer:\x20Xfinity\x20Broadband\x20Router\x20Server\r\n\r\n\
+SF:x20\n<!DOCTYPE\x20html\x20PUBLIC\x20\"-//W3C//DTD\x20XHTML\x201\.0\x20S
+SF:trict//EN\"\x20\"http://www\.w3\.org/TR/xhtml1/DTD/xhtml1-strict\.dtd\"
+SF:>\n<html\x20xmlns=\"ht")%r(HTTPOptions,24AE,"HTTP/1\.0\x20200\x20OK\r\n
+SF:X-robots-tag:\x20noindex,nofollow\r\nContent-type:\x20text/html;\x20cha
+SF:rset=UTF-8\r\nX-Frame-Options:\x20deny\r\nX-XSS-Protection:\x201;\x20mo
+SF:de=block\r\nX-Content-Type-Options:\x20nosniff\r\nContent-Security-Poli
+SF:cy:\x20default-src\x20'self'\x20'unsafe-inline'\x20'unsafe-eval';\x20st
+SF:yle-src\x20'self'\x20'unsafe-inline'\x20'unsafe-eval';\x20frame-src\x20
+SF:'self'\x20'unsafe-inline'\x20'unsafe-eval';\x20font-src\x20'self'\x20'u
+SF:nsafe-inline'\x20'unsafe-eval';\x20form-action\x20'self'\x20'unsafe-inl
+SF:ine'\x20'unsafe-eval';\x20script-src\x20'self'\x20'unsafe-inline'\x20'u
+SF:nsafe-eval';\x20img-src\x20'self';\x20connect-src\x20'self';\x20object-
+SF:src\x20'none';\x20media-src\x20'none';\x20script-nonce\x20'none';\x20pl
+SF:ugin-types\x20'none';\x20reflected-xss\x20'none';\x20report-uri\x20'non
+SF:e';\r\nContent-Length:\x208617\r\nConnection:\x20close\r\nDate:\x20Sat,
+SF:\x2008\x20May\x202021\x2003:52:38\x20GMT\r\nServer:\x20Xfinity\x20Broad
+SF:band\x20Router\x20Server\r\n\r\n\x20\n<!DOCTYPE\x20html\x20PUBLIC\x20\"
+SF:-//W3C//DTD\x20XHTML\x201\.0\x20Strict//EN\"\x20\"http://www\.w3\.org/T
+SF:R/xhtml1/DTD/xhtml1-strict\.dtd\">\n<html\x20xmlns=\"ht");
+Service Info: OS: Linux; CPE: cpe:/o:linux:linux_kernel:4.9.135-prod_19.3
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 153.22 seconds

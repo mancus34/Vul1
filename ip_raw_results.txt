@@ -1,0 +1,7 @@
+10.0.0.1	80:d0:4a:68:f5:4b	Technicolor CH USA Inc.
+10.0.0.5	d4:81:d7:b6:f5:34	Dell Inc.
+10.0.0.31	94:e9:79:44:b2:0f	Liteon Technology Corporation
+10.0.0.77	38:68:93:99:67:a4	(Unknown)
+10.0.0.188	00:10:75:2d:1b:79	Segate Technology LLC
+10.0.0.126	8c:49:62:f6:25:68	Roku, Inc
+
